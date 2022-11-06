@@ -12,7 +12,7 @@ Check what go tools installed: Ctrl Shift P-> Go: Locate Configured Go tools
 
 Install / update tools: Ctrl Shift P-> Go: Install/Update tools. Select all. After successfully update see message: All tools successfully installed. You are ready to Go. :)
 
-Install dependencies: go mod tidi
+Install dependencies: go mod tidy
 
 Build: go build .
 
