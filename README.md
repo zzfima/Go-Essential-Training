@@ -4,9 +4,9 @@ based on: https://www.linkedin.com/learning/go-essential-training-16567666
 
 Install Go
 Install VSCode
-Get sources
+Get sources from: https://github.com/zzfima/Go-Essential-Training.git
 
-In VSCode terminal type (instead of test_code you can type anything): go mod init go_essential_training
+go module maintenance initialization: go mod init go_essential_training
 
 Check what go tools installed: Ctrl Shift P-> Go: Locate Configured Go tools
 
@@ -17,3 +17,5 @@ Install dependencies: go mod tidi
 Build: go build .
 
 Run: go run .
+
+Help: go help
