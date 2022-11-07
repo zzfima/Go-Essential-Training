@@ -6,9 +6,16 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// TestAddNumbers TestAddNumbers
-func TestAddNumbers(t *testing.T) {
+// TestDoubleArrayAt TestDoubleArrayAt
+func TestDoubleArrayAt(t *testing.T) {
 	arr := []int{1, 2, 3, 4}
-	DoubleAt(arr, 2)
+	DoubleArrayAt(arr, 2)
 	require.Equal(t, arr[2], 6)
+}
+
+// TestDoubleValue TestDoubleValue
+func TestDoubleValue(t *testing.T) {
+	v := 4
+	DoubleValue(&v)
+	require.Equal(t, v, 8)
 }
