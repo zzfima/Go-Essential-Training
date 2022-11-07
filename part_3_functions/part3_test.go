@@ -19,3 +19,14 @@ func TestDoubleValue(t *testing.T) {
 	DoubleValue(&v)
 	require.Equal(t, v, 8)
 }
+
+// TestNextAge TestNextAge
+func TestNextAge(t *testing.T) {
+	n, e := NextAge(4)
+	require.Equal(t, 5, n)
+	require.Equal(t, nil, e)
+
+	n, e = NextAge(-3)
+	require.Equal(t, 0, n)
+	require.Equal(t, "Negative age received", e.Error())
+}
