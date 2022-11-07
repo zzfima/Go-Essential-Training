@@ -8,14 +8,12 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// TestBudget TestBudget
 func TestBudget(t *testing.T) {
 	budget1 := Budget{11, 23.4, time.Now().Add(time.Hour * 24 * 7)}
 	require.Equal(t, 11, budget1.CampaignID)
 	require.Equal(t, 23.4, budget1.Balance, 0.1)
 }
 
-// TestBudgetExpires TestBudgetExpires
 func TestBudgetExpires(t *testing.T) {
 	timeNow := time.Now().Add(time.Hour * 24 * 7)
 	budget1 := Budget{11, 23.4, timeNow}
@@ -23,7 +21,6 @@ func TestBudgetExpires(t *testing.T) {
 	require.InDelta(t, 25.6, budget1.Balance, 0.1)
 }
 
-// TestSquares TestSquares
 func TestSquares(t *testing.T) {
 	s := NewSquare(3, 4, 5.0)
 	require.Equal(t, 25.0, s.Area())
@@ -32,7 +29,6 @@ func TestSquares(t *testing.T) {
 	require.Equal(t, 6, s.Y)
 }
 
-// TestCircles TestCircles
 func TestCircles(t *testing.T) {
 	c := NewCircle(3, 4, 5.0)
 	require.Equal(t, math.Pi*5.0*5.0, c.Area())
@@ -41,7 +37,6 @@ func TestCircles(t *testing.T) {
 	require.Equal(t, 6, c.Y)
 }
 
-// TestShapes TestShapes
 func TestShapes(t *testing.T) {
 	s := NewSquare(3, 4, 5.0)
 	c := NewCircle(3, 4, 5.0)
@@ -56,4 +51,20 @@ func TestShapes(t *testing.T) {
 	require.Equal(t, 6, s.Y)
 	require.Equal(t, 6, c.X)
 	require.Equal(t, 8, c.Y)
+}
+
+func TestGeneratePanic(t *testing.T) {
+	require.Panics(t, GeneratePanic)
+}
+
+func TestSafeValue(t *testing.T) {
+	arr := []int{3, 4, 5}
+
+	r1, e1 := SafeValue(arr, 2)
+	require.Equal(t, 5, r1)
+	require.Nil(t, e1)
+
+	r2, e2 := SafeValue(arr, 3)
+	require.Equal(t, 0, r2)
+	require.NotNil(t, e2)
 }
