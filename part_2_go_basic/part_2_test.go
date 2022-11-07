@@ -16,3 +16,16 @@ func TestFizzBuzz(t *testing.T) {
 	require.Equal(t, CheckFizzBuzzNumber(10), "buzz")
 	require.Equal(t, CheckFizzBuzzNumber(9), "fizz")
 }
+
+func TestFindMax(t *testing.T) {
+	arr1 := []int{4, 5, 6, 7, 8, 1, 44, 2, -1}
+	arr2 := []int{-222, 44, 55, -3, 10000, -20, 444}
+
+	arr1index, arr1value := FindMax(arr1)
+	require.Equal(t, arr1index, 6)
+	require.Equal(t, arr1value, 44)
+
+	arr2index, arr2value := FindMax(arr2)
+	require.Equal(t, arr2index, 4)
+	require.Equal(t, arr2value, 10000)
+}
