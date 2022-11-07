@@ -21,3 +21,12 @@ func TestBudgetExpires(t *testing.T) {
 	budget1.ExtendBalance(2.2)
 	require.InDelta(t, 25.6, budget1.Balance, 0.1)
 }
+
+// TestSquares TestSquares
+func TestSquares(t *testing.T) {
+	s1 := NewSquare(3, 4, 5)
+	require.Equal(t, 25, s1.Area())
+	s1.Move(2, 2)
+	require.Equal(t, 5, s1.X)
+	require.Equal(t, 6, s1.Y)
+}
