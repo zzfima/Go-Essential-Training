@@ -13,7 +13,7 @@ func DoubleValue(v *int) {
 }
 
 //NextAge get next age
-func NextAge(currentAge int) (nextAge int, e error) {
+func NextAge(currentAge int) (int, error) {
 	if currentAge < 0 {
 		return 0, fmt.Errorf("Negative age received")
 	}
