@@ -30,3 +30,11 @@ func TestNextAge(t *testing.T) {
 	require.Equal(t, 0, n)
 	require.Equal(t, "Negative age received", e.Error())
 }
+
+func TestGetHTTPText(t *testing.T) {
+	url := "https://phet-dev.colorado.edu/html/build-an-atom/0.0.0-3/simple-text-only-test-page.html"
+
+	s, e := GetHTTPText(url)
+	require.Equal(t, nil, e)
+	require.Equal(t, 992, len(s))
+}
