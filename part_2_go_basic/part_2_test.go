@@ -37,18 +37,19 @@ func TestCountWords(t *testing.T) {
 	Sew me a sail
 	To catch me the wind
 	`
-	expected := make(map[string]int32)
-	expected["Needles"] = 2
-	expected["Sew"] = 1
-	expected["To"] = 1
-	expected["a"] = 1
-	expected["and"] = 2
-	expected["catch"] = 1
-	expected["me"] = 2
-	expected["pins"] = 2
-	expected["sail"] = 1
-	expected["the"] = 1
-	expected["wind"] = 1
+	expected := map[string]int32{
+		"Needles": 2,
+		"Sew":     1,
+		"To":      1,
+		"a":       1,
+		"and":     2,
+		"catch":   1,
+		"me":      2,
+		"pins":    2,
+		"sail":    1,
+		"the":     1,
+		"wind":    1,
+	}
 
 	require.Equal(t, CountWords(text), expected)
 }
