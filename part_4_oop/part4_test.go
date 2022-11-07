@@ -1,6 +1,7 @@
 package part4
 
 import (
+	"math"
 	"testing"
 	"time"
 
@@ -24,9 +25,35 @@ func TestBudgetExpires(t *testing.T) {
 
 // TestSquares TestSquares
 func TestSquares(t *testing.T) {
-	s1 := NewSquare(3, 4, 5)
-	require.Equal(t, 25, s1.Area())
-	s1.Move(2, 2)
-	require.Equal(t, 5, s1.X)
-	require.Equal(t, 6, s1.Y)
+	s := NewSquare(3, 4, 5.0)
+	require.Equal(t, 25.0, s.Area())
+	s.Move(2, 2)
+	require.Equal(t, 5, s.X)
+	require.Equal(t, 6, s.Y)
+}
+
+// TestCircles TestCircles
+func TestCircles(t *testing.T) {
+	c := NewCircle(3, 4, 5.0)
+	require.Equal(t, math.Pi*5.0*5.0, c.Area())
+	c.Move(2, 2)
+	require.Equal(t, 5, c.X)
+	require.Equal(t, 6, c.Y)
+}
+
+// TestShapes TestShapes
+func TestShapes(t *testing.T) {
+	s := NewSquare(3, 4, 5.0)
+	c := NewCircle(3, 4, 5.0)
+	shapes := []Shape{s, c}
+
+	require.Equal(t, 25.0, shapes[0].Area())
+	require.Equal(t, math.Pi*5.0*5.0, shapes[1].Area())
+
+	shapes[0].Move(1, 2)
+	shapes[1].Move(3, 4)
+	require.Equal(t, 4, s.X)
+	require.Equal(t, 6, s.Y)
+	require.Equal(t, 6, c.X)
+	require.Equal(t, 8, c.Y)
 }
