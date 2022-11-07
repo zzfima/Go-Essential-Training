@@ -29,3 +29,26 @@ func TestFindMax(t *testing.T) {
 	require.Equal(t, arr2index, 4)
 	require.Equal(t, arr2value, 10000)
 }
+
+func TestCountWords(t *testing.T) {
+	text := `
+	Needles and pins
+	Needles and pins
+	Sew me a sail
+	To catch me the wind
+	`
+	expected := make(map[string]int32)
+	expected["Needles"] = 2
+	expected["Sew"] = 1
+	expected["To"] = 1
+	expected["a"] = 1
+	expected["and"] = 2
+	expected["catch"] = 1
+	expected["me"] = 2
+	expected["pins"] = 2
+	expected["sail"] = 1
+	expected["the"] = 1
+	expected["wind"] = 1
+
+	require.Equal(t, CountWords(text), expected)
+}
