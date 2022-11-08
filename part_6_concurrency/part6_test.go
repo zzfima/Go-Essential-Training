@@ -1,7 +1,9 @@
 package part6
 
 import (
+	"fmt"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/require"
 )
@@ -13,6 +15,7 @@ func TestGetContentType(t *testing.T) {
 }
 
 func TestSerialGetContentType(t *testing.T) {
+	startTime := time.Now()
 	sites := []string{
 		"https://github.com/",
 		"https://www.linkedin.com/",
@@ -24,4 +27,5 @@ func TestSerialGetContentType(t *testing.T) {
 	require.Equal(t, "text/html; charset=utf-8", r1[1])
 	require.Equal(t, "text/html; charset=utf-8", r1[2])
 	require.Nil(t, e1)
+	fmt.Println("time passed:", time.Since(startTime))
 }
