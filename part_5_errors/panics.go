@@ -1,4 +1,4 @@
-package part4
+package part5
 
 import "fmt"
 
@@ -7,7 +7,7 @@ func GeneratePanic() {
 	panic("oops")
 }
 
-//SafeValue safe way7 get value from array
+//SafeValue safe way get value from array
 func SafeValue(arr []int, index int) (res int, err error) {
 	defer func() {
 		if e := recover(); e != nil {
