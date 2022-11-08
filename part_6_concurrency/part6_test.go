@@ -60,3 +60,8 @@ func TestChannelMultipleRunWithClose(t *testing.T) {
 	i := ChannelMultipleRunWithClose()
 	require.Equal(t, 25, i)
 }
+
+func TestBufferedChannel(t *testing.T) {
+	v := BufferedChannel()
+	require.Equal(t, 55, v)
+}

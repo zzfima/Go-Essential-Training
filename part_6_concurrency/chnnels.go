@@ -49,3 +49,10 @@ func ChannelMultipleRunWithClose() int {
 
 	return sum
 }
+
+//BufferedChannel using channel buffered initialized by 1
+func BufferedChannel() int {
+	ch := make(chan int, 1)
+	ch <- 55
+	return <-ch
+}
