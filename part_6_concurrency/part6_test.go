@@ -45,3 +45,8 @@ func TestSerialGetContentTypeConcurrent(t *testing.T) {
 	require.Nil(t, e1)
 	fmt.Println("time passed:", time.Since(startTime))
 }
+
+func TestChannelRun(t *testing.T) {
+	i := ChannelRun()
+	require.Equal(t, 5, i)
+}
