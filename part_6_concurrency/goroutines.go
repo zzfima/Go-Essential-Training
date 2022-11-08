@@ -3,6 +3,7 @@ package part6
 import (
 	"fmt"
 	"net/http"
+	"sync"
 )
 
 //goroutine - like thread but very light
@@ -33,5 +34,25 @@ func SerialGetContentType(sites []string) ([]string, error) {
 		contentTypes = append(contentTypes, c)
 	}
 
+	return contentTypes, nil
+}
+
+// SerialGetContentTypeConcurrent SerialGetContentTypeConcurrent
+func SerialGetContentTypeConcurrent(sites []string) ([]string, error) {
+	contentTypes := []string{}
+	var wg sync.WaitGroup
+
+	for _, url := range sites {
+		wg.Add(1)
+		go func(u string) {
+			c, e := GetContentType(u)
+			if e != nil {
+				return
+			}
+			contentTypes = append(contentTypes, c)
+			wg.Done()
+		}(url)
+	}
+	wg.Wait()
 	return contentTypes, nil
 }
