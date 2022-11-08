@@ -94,3 +94,12 @@ func TestSelectChannelTimeout(t *testing.T) {
 	v := SelectChannelTimeout()
 	require.Equal(t, 12, v)
 }
+
+func TestContextManager(t *testing.T) {
+	res := ContextManager()
+	require.Equal(t, "https://adsЯus.com/19", res[0].AdURL)
+	require.Equal(t, 0.05, res[0].Price)
+
+	require.Equal(t, "https://adsЯus.com/default", res[1].AdURL)
+	require.Equal(t, 0.02, res[1].Price)
+}
