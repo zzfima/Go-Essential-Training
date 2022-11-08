@@ -81,3 +81,11 @@ func TestWaitForAllGetContentType(t *testing.T) {
 	require.Nil(t, e1)
 	fmt.Println("time passed:", time.Since(startTime))
 }
+
+func TestSelectChannel(t *testing.T) {
+	v := SelectChannel(5)
+	require.Equal(t, 8, v)
+
+	v = SelectChannel(6)
+	require.Equal(t, 6, v)
+}

@@ -56,3 +56,26 @@ func BufferedChannel() int {
 	ch <- 55
 	return <-ch
 }
+
+//SelectChannel use select with channels
+func SelectChannel(v int) int {
+	ch1, ch2 := make(chan int), make(chan int)
+	val1 := 0
+
+	go func(v1 int) {
+		if v1%2 == 0 {
+			ch1 <- 2
+		} else {
+			ch2 <- 2
+		}
+	}(v)
+
+	select {
+	case val1 = <-ch1:
+		val1 *= 3
+	case val1 = <-ch2:
+		val1 *= 4
+	}
+
+	return val1
+}
