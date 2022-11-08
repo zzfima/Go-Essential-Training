@@ -29,3 +29,23 @@ func ChannelMultipleRun() int {
 
 	return sum
 }
+
+//ChannelMultipleRunWithClose multiple chanel operation with close operation
+func ChannelMultipleRunWithClose() int {
+	ch := make(chan int)
+	sum := 0
+
+	go func() {
+		for i := 0; i < 5; i++ {
+			ch <- 5
+		}
+		close(ch) //close channel
+	}()
+
+	//iterate on channel until not closed
+	for i := range ch {
+		sum += i
+	}
+
+	return sum
+}

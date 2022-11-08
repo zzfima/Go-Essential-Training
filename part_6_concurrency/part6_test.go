@@ -55,3 +55,8 @@ func TestChannelMultipleRun(t *testing.T) {
 	i := ChannelMultipleRun()
 	require.Equal(t, 15, i)
 }
+
+func TestChannelMultipleRunWithClose(t *testing.T) {
+	i := ChannelMultipleRunWithClose()
+	require.Equal(t, 25, i)
+}
