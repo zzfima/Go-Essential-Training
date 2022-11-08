@@ -7,8 +7,8 @@ import (
 
 //goroutine - like thread but very light
 
-// GetContentTypeType GetContentTypeType
-func GetContentTypeType(url string) (string, error) {
+// GetContentType GetContentType
+func GetContentType(url string) (string, error) {
 	response, e := http.Get(url)
 
 	if e != nil {
@@ -20,4 +20,18 @@ func GetContentTypeType(url string) (string, error) {
 	contentType := response.Header.Get("content-type")
 	fmt.Printf("%s->%s\n", url, contentType)
 	return contentType, nil
+}
+
+// SerialGetContentType SerialGetContentType
+func SerialGetContentType(sites []string) ([]string, error) {
+	contentTypes := []string{}
+	for _, url := range sites {
+		c, e := GetContentType(url)
+		if e != nil {
+			return nil, e
+		}
+		contentTypes = append(contentTypes, c)
+	}
+
+	return contentTypes, nil
 }
