@@ -40,19 +40,19 @@ func SerialGetContentType(sites []string) ([]string, error) {
 // SerialGetContentTypeConcurrent SerialGetContentTypeConcurrent
 func SerialGetContentTypeConcurrent(sites []string) ([]string, error) {
 	contentTypes := []string{}
-	var wg sync.WaitGroup
+	var wg sync.WaitGroup //wait group - like semaphore
 
 	for _, url := range sites {
-		wg.Add(1)
+		wg.Add(1) //add 1 to semaphore
 		go func(u string) {
 			c, e := GetContentType(u)
 			if e != nil {
 				return
 			}
 			contentTypes = append(contentTypes, c)
-			wg.Done()
+			wg.Done() // signal done
 		}(url)
 	}
-	wg.Wait()
+	wg.Wait() //wait until all finished
 	return contentTypes, nil
 }
