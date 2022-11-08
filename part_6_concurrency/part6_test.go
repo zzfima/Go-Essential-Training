@@ -46,7 +46,12 @@ func TestSerialGetContentTypeConcurrent(t *testing.T) {
 	fmt.Println("time passed:", time.Since(startTime))
 }
 
-func TestChannelRun(t *testing.T) {
-	i := ChannelRun()
+func TestChannelSingleRun(t *testing.T) {
+	i := ChannelSingleRun()
 	require.Equal(t, 5, i)
+}
+
+func TestChannelMultipleRun(t *testing.T) {
+	i := ChannelMultipleRun()
+	require.Equal(t, 15, i)
 }
