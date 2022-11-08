@@ -89,3 +89,8 @@ func TestSelectChannel(t *testing.T) {
 	v = SelectChannel(6)
 	require.Equal(t, 6, v)
 }
+
+func TestSelectChannelTimeout(t *testing.T) {
+	v := SelectChannelTimeout()
+	require.Equal(t, 12, v)
+}

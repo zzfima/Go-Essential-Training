@@ -1,6 +1,11 @@
 package part6
 
-//ChannelSingleRun single chanel operation
+import (
+	"fmt"
+	"time"
+)
+
+// ChannelSingleRun single chanel operation
 func ChannelSingleRun() int {
 	ch := make(chan int)
 
@@ -11,7 +16,7 @@ func ChannelSingleRun() int {
 	return <-ch
 }
 
-//ChannelMultipleRun multiple chanel operation
+// ChannelMultipleRun multiple chanel operation
 func ChannelMultipleRun() int {
 	ch := make(chan int)
 	count := 3
@@ -30,7 +35,7 @@ func ChannelMultipleRun() int {
 	return sum
 }
 
-//ChannelMultipleRunWithClose multiple chanel operation with close operation
+// ChannelMultipleRunWithClose multiple chanel operation with close operation
 func ChannelMultipleRunWithClose() int {
 	ch := make(chan int)
 	sum := 0
@@ -50,14 +55,14 @@ func ChannelMultipleRunWithClose() int {
 	return sum
 }
 
-//BufferedChannel using channel buffered initialized by 1
+// BufferedChannel using channel buffered initialized by 1
 func BufferedChannel() int {
 	ch := make(chan int, 1)
 	ch <- 55
 	return <-ch
 }
 
-//SelectChannel use select with channels
+// SelectChannel use select with channels
 func SelectChannel(v int) int {
 	ch1, ch2 := make(chan int), make(chan int)
 	val1 := 0
@@ -78,4 +83,22 @@ func SelectChannel(v int) int {
 	}
 
 	return val1
+}
+
+// SelectChannelTimeout SelectChannelTimeout
+func SelectChannelTimeout() int {
+	ch := make(chan int)
+
+	go func() {
+		fmt.Println("start fill channel")
+		time.Sleep(2 * time.Second)
+		ch <- 11
+	}()
+
+	select {
+	case v1 := <-ch:
+		return v1
+	case <-time.After(1 * time.Second):
+		return 12
+	}
 }
