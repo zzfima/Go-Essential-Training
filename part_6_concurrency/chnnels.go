@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// ChannelSingleRun single chanel operation
+// ChannelSingleRun single channel operation
 func ChannelSingleRun() int {
 	ch := make(chan int)
 
@@ -16,7 +16,7 @@ func ChannelSingleRun() int {
 	return <-ch
 }
 
-// ChannelMultipleRun multiple chanel operation
+// ChannelMultipleRun multiple channel operation
 func ChannelMultipleRun() int {
 	ch := make(chan int)
 	count := 3
@@ -35,7 +35,7 @@ func ChannelMultipleRun() int {
 	return sum
 }
 
-// ChannelMultipleRunWithClose multiple chanel operation with close operation
+// ChannelMultipleRunWithClose multiple channel operation with close operation
 func ChannelMultipleRunWithClose() int {
 	ch := make(chan int)
 	sum := 0
@@ -85,7 +85,7 @@ func SelectChannel(v int) int {
 	return val1
 }
 
-// SelectChannelTimeout SelectChannelTimeout
+// SelectChannelTimeout use select with channels with timeout
 func SelectChannelTimeout() int {
 	ch := make(chan int)
 
