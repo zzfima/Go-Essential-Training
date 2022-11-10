@@ -105,5 +105,8 @@ func TestContextManager(t *testing.T) {
 }
 
 func TestRunAllDownloadSize(t *testing.T) {
-	RunAllDownloadSize()
+	s, _, e := RunAllDownloadSize()
+
+	require.Nil(t, e)
+	require.Equal(t, s, 404657303)
 }

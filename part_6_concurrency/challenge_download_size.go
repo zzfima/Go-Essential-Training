@@ -39,9 +39,9 @@ func downloadSize(url string) (int, error) {
 }
 
 // RunAllDownloadSize run download size on a lot of sites
-func RunAllDownloadSize() {
+func RunAllDownloadSize() (size int, duration time.Duration, err error) {
 	start := time.Now()
-	size := 0
+	size = 0
 	for month := 1; month <= 12; month++ {
 		for _, color := range colors {
 			url := fmt.Sprintf(urlTemplate, color, month)
@@ -49,11 +49,14 @@ func RunAllDownloadSize() {
 			n, err := downloadSize(url)
 			if err != nil {
 				log.Fatal(err)
+				return 0, 0, err
 			}
 			size += n
 		}
 	}
 
-	duration := time.Since(start)
+	duration = time.Since(start)
 	fmt.Println(size, duration)
+
+	return size, duration, nil
 }
