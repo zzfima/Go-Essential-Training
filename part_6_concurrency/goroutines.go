@@ -8,7 +8,7 @@ import (
 
 //goroutine - like thread but very light
 
-// GetContentType GetContentType
+// GetContentType get content type of single url
 func GetContentType(url string) (string, error) {
 	response, e := http.Get(url)
 
@@ -23,7 +23,7 @@ func GetContentType(url string) (string, error) {
 	return contentType, nil
 }
 
-// SerialGetContentType SerialGetContentType
+// SerialGetContentType get content type of multiple urls
 func SerialGetContentType(sites []string) ([]string, error) {
 	contentTypes := []string{}
 	for _, url := range sites {
@@ -37,22 +37,22 @@ func SerialGetContentType(sites []string) ([]string, error) {
 	return contentTypes, nil
 }
 
-// SerialGetContentTypeConcurrent SerialGetContentTypeConcurrent
+// SerialGetContentTypeConcurrent get content type of multiple urls in asynchronous manner
 func SerialGetContentTypeConcurrent(sites []string) ([]string, error) {
 	contentTypes := []string{}
 	var wg sync.WaitGroup //wait group - like semaphore
 
 	for _, url := range sites {
-		wg.Add(1) //add 1 to semaphore
+		wg.Add(1) //*** enter to semaphore (add 1 to wg)
 		go func(u string) {
 			c, e := GetContentType(u)
 			if e != nil {
 				return
 			}
 			contentTypes = append(contentTypes, c)
-			wg.Done() // signal done
+			wg.Done() //*** out from semaphore (sub 1 from wg)
 		}(url)
 	}
-	wg.Wait() //wait until all finished
+	wg.Wait() //*** wait until all finished ()until wg = 0)
 	return contentTypes, nil
 }
