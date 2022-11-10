@@ -103,3 +103,7 @@ func TestContextManager(t *testing.T) {
 	require.Equal(t, "https://adsЯus.com/default", res[1].AdURL)
 	require.Equal(t, 0.02, res[1].Price)
 }
+
+func TestRunAllDownloadSize(t *testing.T) {
+	RunAllDownloadSize()
+}
