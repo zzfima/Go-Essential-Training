@@ -38,20 +38,20 @@ func downloadSize(url string) (int, error) {
 	return strconv.Atoi(resp.Header.Get("Content-Length"))
 }
 
-var chNumber = make(chan int)
-var chError = make(chan error)
-
 // RunAllDownloadSize run download size on a lot of sites
 func RunAllDownloadSize() (int, time.Duration, error) {
 	start := time.Now()
 	size := 0
+
+	var chNumber = make(chan int)
+	var chError = make(chan error)
 
 	for month := 1; month <= 12; month++ {
 		for _, color := range colors {
 			u := fmt.Sprintf(urlTemplate, color, month)
 			fmt.Println(u)
 
-			go downloadSizeChannels(u)
+			go downloadSizeChannels(u, chNumber, chError)
 
 			n := <-chNumber
 			err := <-chError
@@ -70,7 +70,7 @@ func RunAllDownloadSize() (int, time.Duration, error) {
 	return size, duration, nil
 }
 
-func downloadSizeChannels(url string) {
+func downloadSizeChannels(url string, chNumber chan int, chError chan error) {
 	n, e := downloadSize(url)
 	chNumber <- n
 	chError <- e
