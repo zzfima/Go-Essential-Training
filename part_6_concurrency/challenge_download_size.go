@@ -50,18 +50,19 @@ func RunAllDownloadSize() (int, time.Duration, error) {
 		for _, color := range colors {
 			u := fmt.Sprintf(urlTemplate, color, month)
 			fmt.Println(u)
-
 			go downloadSizeChannels(u, chNumber, chError)
-
-			n := <-chNumber
-			err := <-chError
-
-			if err != nil {
-				log.Fatal(err)
-				return 0, 0, err
-			}
-			size += n
 		}
+	}
+
+	for month := 1; month <= 12*len(colors); month++ {
+		n := <-chNumber
+		err := <-chError
+
+		if err != nil {
+			log.Fatal(err)
+			return 0, 0, err
+		}
+		size += n
 	}
 
 	duration := time.Since(start)
