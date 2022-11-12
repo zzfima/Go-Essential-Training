@@ -15,9 +15,7 @@ import (
 
 func TestCsvFiles(t *testing.T) {
 	csvFile, e := os.Open("data.csv")
-	if e != nil {
-		return
-	}
+	require.NoError(t, e)
 
 	csvReader := csv.NewReader(bufio.NewReader(csvFile))
 
@@ -31,13 +29,10 @@ func TestCsvFiles(t *testing.T) {
 		}
 
 		f0, e := strconv.ParseFloat(strings.ReplaceAll(record[0], " ", ""), 64)
-		if e != nil {
-			return
-		}
+		require.NoError(t, e)
+
 		f1, e := strconv.ParseFloat(strings.ReplaceAll(record[1], " ", ""), 64)
-		if e != nil {
-			return
-		}
+		require.NoError(t, e)
 
 		tc := TestCase{f0, f1}
 		r := Calc(tc)
