@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"encoding/csv"
 	"io"
-	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -23,10 +22,11 @@ func TestCsvFiles(t *testing.T) {
 		record, e := csvReader.Read()
 		if e == io.EOF {
 			break
-		} else if e != nil {
+		} /*else if e != nil {
 			log.Fatal(e.Error())
 			return
-		}
+		}*/
+		require.NoError(t, e)
 
 		f0, e := strconv.ParseFloat(strings.ReplaceAll(record[0], " ", ""), 64)
 		require.NoError(t, e)
