@@ -23,9 +23,9 @@ type Request struct {
 }
 
 // ReadRequestsFromFile read json to struct from file
-func ReadRequestsFromFile() Requests {
+func ReadRequestsFromFile(path string) Requests {
 	//open json file
-	jsonFile, e := os.Open("bank.json")
+	jsonFile, e := os.Open(path)
 	if e != nil {
 		return Requests{}
 	}
@@ -61,7 +61,7 @@ func decodeToRequest(r io.Reader) Requests {
 }
 
 // WriteRequestsToFile write requests to json file
-func WriteRequestsToFile(path string, requests Request) {
+func WriteRequestsToFile(path string, requests Requests) {
 	if e := os.Remove(path); e != nil {
 		fmt.Print("File removed")
 	}
@@ -72,8 +72,7 @@ func WriteRequestsToFile(path string, requests Request) {
 	}
 	defer requestsFile.Close()
 
-	requestsWriter := bufio.NewWriter(requestsFile)
-	requestsEncoder := json.NewEncoder(requestsWriter)
+	requestsEncoder := json.NewEncoder(requestsFile)
 
 	if e := requestsEncoder.Encode(requests); e != nil {
 		log.Fatalf("Can not encode struct. Error %e", e)
