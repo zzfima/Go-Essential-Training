@@ -3,6 +3,7 @@ package part8
 import (
 	"bufio"
 	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -57,4 +58,24 @@ func decodeToRequest(r io.Reader) Requests {
 	}
 
 	return requests
+}
+
+// WriteRequestsToFile write requests to json file
+func WriteRequestsToFile(path string, requests Request) {
+	if e := os.Remove(path); e != nil {
+		fmt.Print("File removed")
+	}
+
+	requestsFile, e := os.Create(path)
+	if e != nil {
+		log.Fatalf("Can not create file. Error %e", e)
+	}
+	defer requestsFile.Close()
+
+	requestsWriter := bufio.NewWriter(requestsFile)
+	requestsEncoder := json.NewEncoder(requestsWriter)
+
+	if e := requestsEncoder.Encode(requests); e != nil {
+		log.Fatalf("Can not encode struct. Error %e", e)
+	}
 }
