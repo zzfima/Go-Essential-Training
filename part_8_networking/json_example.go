@@ -36,16 +36,8 @@ func ReadRequestsFromFile(path string) Requests {
 }
 
 // ReadRequestsFromString read json to struct from string
-func ReadRequestsFromString() Requests {
-	var requestStr = `
-	"requests": [
-		{"user" : "alex", "type": "worker", "amount": 44.2},
-		{"user" : "tom", "type": "manager", "amount": 32.2},
-		{"user" : "veronica", "type": "designer", "amount": 45.2}
-	]
-	`
-
-	bankStream := strings.NewReader(requestStr)
+func ReadRequestsFromString(requestsAsJSONString string) Requests {
+	bankStream := strings.NewReader(requestsAsJSONString)
 	return decodeToRequest(bankStream)
 }
 

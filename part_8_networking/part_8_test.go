@@ -14,7 +14,15 @@ func TestReadRequestsFromFile(t *testing.T) {
 }
 
 func TestReadRequestsFromString(t *testing.T) {
-	r := ReadRequestsFromString()
+
+	requestsAsJSONString := `
+	{"requests": [
+		{"user" : "alex", "type": "worker", "amount": 44.2},
+		{"user" : "tom", "type": "manager", "amount": 32.2},
+		{"user" : "veronica", "type": "designer", "amount": 45.2}
+	]}
+	`
+	r := ReadRequestsFromString(requestsAsJSONString)
 	require.Equal(t, 32.2, r.Requests[1].Amount)
 	require.Equal(t, "tom", r.Requests[1].User)
 	require.Equal(t, "manager", r.Requests[1].Type)
