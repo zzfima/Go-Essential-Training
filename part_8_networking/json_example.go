@@ -3,8 +3,10 @@ package part8
 import (
 	"bufio"
 	"encoding/json"
+	"io"
 	"log"
 	"os"
+	"strings"
 )
 
 // Requests define requests in json
@@ -19,8 +21,8 @@ type Request struct {
 	Amount float64 `amount:"amount"`
 }
 
-// ReadJSON read json to struct
-func ReadJSON() Requests {
+// ReadRequestsFromFile read json to struct from file
+func ReadRequestsFromFile() Requests {
 	//open json file
 	jsonFile, e := os.Open("bank.json")
 	if e != nil {
@@ -29,7 +31,25 @@ func ReadJSON() Requests {
 	defer jsonFile.Close()
 
 	bankStream := bufio.NewReader(jsonFile)
-	bankDecoder := json.NewDecoder(bankStream)
+	return decodeToRequest(bankStream)
+}
+
+// ReadRequestsFromString read json to struct from string
+func ReadRequestsFromString() Requests {
+	var requestStr = `
+	"requests": [
+		{"user" : "alex", "type": "worker", "amount": 44.2},
+		{"user" : "tom", "type": "manager", "amount": 32.2},
+		{"user" : "veronica", "type": "designer", "amount": 45.2}
+	]
+	`
+
+	bankStream := strings.NewReader(requestStr)
+	return decodeToRequest(bankStream)
+}
+
+func decodeToRequest(r io.Reader) Requests {
+	bankDecoder := json.NewDecoder(r)
 
 	var requests Requests
 	if e := bankDecoder.Decode(&requests); e != nil {
