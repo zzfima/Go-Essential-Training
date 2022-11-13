@@ -1,0 +1,7 @@
+{
+    "requests": [
+        {"user" : "alex", "type": "worker", "amount": 44.2},
+        {"user" : "tom", "type": "manager", "amount": 32.2},
+        {"user" : "veronica", "type": "designer", "amount": 45.2}
+    ]
+}
