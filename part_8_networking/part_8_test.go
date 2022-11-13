@@ -39,3 +39,9 @@ func TestWriteRequestsToFile(t *testing.T) {
 	require.Equal(t, "Gagarin", r.Requests[0].User)
 	require.Equal(t, "Astronaut", r.Requests[0].Type)
 }
+
+func TestHTTPContentLength(t *testing.T) {
+	s, e := GetHTTPContentLength()
+	require.Nil(t, e)
+	require.Equal(t, 273, s)
+}
