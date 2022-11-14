@@ -26,8 +26,10 @@ func TimeoutAndSizeLimit() {
 	}
 	defer resp.Body.Close()
 
-	const mb = 1 << 20
-	r := io.LimitReader(resp.Body, mb)
+	const bytesToRead = 14
+	r := io.LimitReader(resp.Body, bytesToRead)
+
+	os.Remove("tmp1.txt")
 
 	f, e := os.OpenFile("tmp1.txt", os.O_CREATE, os.ModeAppend)
 	if e != nil {
