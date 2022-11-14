@@ -49,3 +49,11 @@ func TestHTTPContentLength(t *testing.T) {
 func TestTimeoutAndSizeLimit(t *testing.T) {
 	TimeoutAndSizeLimit()
 }
+
+func TestGetUserInfo(t *testing.T) {
+	userInfo, e := GetUserInfo("https://api.github.com/users/zzfima")
+	require.Nil(t, e)
+	require.Equal(t, "zzfima", userInfo.Login)
+	require.Equal(t, 90, userInfo.NumberOfRepos)
+	require.Equal(t, "Efim Zabarsky", userInfo.Name)
+}
