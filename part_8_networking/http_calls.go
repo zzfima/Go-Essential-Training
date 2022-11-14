@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-// GetHTTPContentLength get body of httpbin
+// GetHTTPContentLength get body of "https://httpbin.org/get"
 func GetHTTPContentLength() (int, error) {
 	response, e := http.Get("https://httpbin.org/get")
 	if e != nil {

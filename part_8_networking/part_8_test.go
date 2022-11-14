@@ -31,7 +31,7 @@ func TestReadRequestsFromString(t *testing.T) {
 func TestWriteRequestsToFile(t *testing.T) {
 	requests := Requests{}
 	requests.Requests = append(requests.Requests, Request{User: "Gagarin", Type: "Astronaut", Amount: 9999.99})
-	requests.Requests = append(requests.Requests, Request{User: "Mendeleev", Type: "Chenmcalist", Amount: 88888.99})
+	requests.Requests = append(requests.Requests, Request{User: "Mendeleev", Type: "Chemist", Amount: 88888.99})
 	WriteRequestsToFile("tmp1.json", requests)
 
 	r := ReadRequestsFromFile("tmp1.json")
@@ -44,4 +44,8 @@ func TestHTTPContentLength(t *testing.T) {
 	s, e := GetHTTPContentLength()
 	require.Nil(t, e)
 	require.Equal(t, 273, s)
+}
+
+func TestTimeoutAndSizeLimit(t *testing.T) {
+	TimeoutAndSizeLimit()
 }
