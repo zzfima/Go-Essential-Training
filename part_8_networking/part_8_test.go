@@ -43,7 +43,7 @@ func TestWriteRequestsToFile(t *testing.T) {
 func TestHTTPContentLength(t *testing.T) {
 	s, e := GetHTTPContentLength()
 	require.Nil(t, e)
-	require.Equal(t, 273, s)
+	require.Equal(t, 271, s)
 }
 
 func TestTimeoutAndSizeLimit(t *testing.T) {
