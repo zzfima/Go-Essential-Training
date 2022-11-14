@@ -2,6 +2,7 @@ package part8
 
 import (
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/require"
 )
@@ -56,4 +57,12 @@ func TestGetUserInfo(t *testing.T) {
 	require.Equal(t, "zzfima", userInfo.Login)
 	require.Equal(t, 90, userInfo.NumberOfRepos)
 	require.Equal(t, "Efim Zabarsky", userInfo.Name)
+}
+
+func TestRunServer(t *testing.T) {
+	go RunServer()
+
+	//s := GetHomePage()
+	//require.Equal(t, "welcome to math server", s)
+	time.Sleep(time.Millisecond * 30000)
 }
